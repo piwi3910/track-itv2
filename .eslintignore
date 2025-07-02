@@ -1,0 +1,11 @@
+node_modules
+dist
+build
+coverage
+.turbo
+.next
+*.config.js
+*.config.ts
+jest.setup.js
+*.min.js
+*.min.css

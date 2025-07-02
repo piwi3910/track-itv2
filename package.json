@@ -1,0 +1,27 @@
+{
+  "name": "track-it",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Internal task management platform",
+  "packageManager": "pnpm@8.15.0",
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "turbo": "^1.13.0",
+    "husky": "^9.0.0",
+    "lint-staged": "^15.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}

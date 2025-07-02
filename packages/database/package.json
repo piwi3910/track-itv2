@@ -1,0 +1,30 @@
+{
+  "name": "@track-it/database",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Database logic and Prisma schema for Track-it",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:migrate:prod": "prisma migrate deploy",
+    "prisma:studio": "prisma studio",
+    "prisma:seed": "tsx prisma/seed.ts",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.1.0"
+  },
+  "devDependencies": {
+    "@track-it/eslint-config": "workspace:*",
+    "prisma": "^5.1.0",
+    "typescript": "^5.0.0",
+    "tsx": "^4.7.0",
+    "@types/node": "^20.4.5"
+  }
+}

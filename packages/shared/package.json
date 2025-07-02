@@ -1,0 +1,22 @@
+{
+  "name": "@track-it/shared",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared types and utilities for Track-it",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "zod": "^3.21.0"
+  },
+  "devDependencies": {
+    "@track-it/eslint-config": "workspace:*",
+    "typescript": "^5.0.0"
+  }
+}
