@@ -6,6 +6,7 @@ import { DashboardPage } from './pages/DashboardPage';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { TasksPage } from './pages/TasksPage';
 import { SearchPage } from './pages/SearchPage';
+import { ProfilePage } from './pages/ProfilePage';
 
 export function Router(): JSX.Element {
   return (
@@ -18,6 +19,7 @@ export function Router(): JSX.Element {
           <Route path="projects" element={<ProjectsPage />} />
           <Route path="tasks" element={<TasksPage />} />
           <Route path="search" element={<SearchPage />} />
+          <Route path="profile" element={<ProfilePage />} />
         </Route>
       </Route>
     </Routes>

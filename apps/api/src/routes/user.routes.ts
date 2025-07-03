@@ -1,16 +1,13 @@
 import { Router } from 'express';
+import { UserController } from '../controllers/user.controller';
 
 export const userRouter = Router();
+const userController = new UserController();
 
-// Placeholder routes - will be implemented
-userRouter.get('/', (_req, res) => {
-  res.json({ message: 'List users endpoint - to be implemented' });
-});
-
-userRouter.get('/:id', (_req, res) => {
-  res.json({ message: 'Get user endpoint - to be implemented' });
-});
-
-userRouter.put('/:id', (_req, res) => {
-  res.json({ message: 'Update user endpoint - to be implemented' });
-});
+// User profile routes
+userRouter.get('/profile', userController.getProfile);
+userRouter.put('/profile', userController.updateProfile);
+userRouter.put('/profile/password', userController.changePassword);
+userRouter.post('/profile/avatar', userController.uploadAvatar);
+userRouter.delete('/profile/avatar', userController.deleteAvatar);
+userRouter.get('/profile/stats', userController.getStats);

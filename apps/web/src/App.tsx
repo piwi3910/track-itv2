@@ -1,6 +1,8 @@
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
+import { Notifications } from '@mantine/notifications';
 import { Router } from './Router';
 
 const queryClient = new QueryClient({
@@ -17,7 +19,10 @@ export function App(): JSX.Element {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <AuthProvider>
-          <Router />
+          <ThemeProvider>
+            <Notifications position="top-right" />
+            <Router />
+          </ThemeProvider>
         </AuthProvider>
       </BrowserRouter>
     </QueryClientProvider>

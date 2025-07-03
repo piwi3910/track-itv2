@@ -40,9 +40,12 @@ export function Layout(): JSX.Element {
               {user && (
                 <>
                   <NotificationDropdown />
-                  <span className="text-sm text-muted-foreground">
+                  <Link
+                    to="/profile"
+                    className="text-sm text-muted-foreground hover:text-primary"
+                  >
                     {user.firstName} {user.lastName}
-                  </span>
+                  </Link>
                   <button
                     onClick={handleLogout}
                     className="text-sm px-3 py-1 border border-input rounded-md hover:bg-accent"
