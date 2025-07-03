@@ -1,24 +1,17 @@
 import { Router } from 'express';
+import { ProjectController } from '../controllers/project.controller';
 
 export const projectRouter = Router();
+const projectController = new ProjectController();
 
-// Placeholder routes - will be implemented
-projectRouter.get('/', (_req, res) => {
-  res.json({ message: 'List projects endpoint - to be implemented' });
-});
+// Project CRUD routes
+projectRouter.get('/', projectController.list);
+projectRouter.post('/', projectController.create);
+projectRouter.get('/:id', projectController.get);
+projectRouter.put('/:id', projectController.update);
+projectRouter.delete('/:id', projectController.delete);
 
-projectRouter.post('/', (_req, res) => {
-  res.json({ message: 'Create project endpoint - to be implemented' });
-});
-
-projectRouter.get('/:id', (_req, res) => {
-  res.json({ message: 'Get project endpoint - to be implemented' });
-});
-
-projectRouter.put('/:id', (_req, res) => {
-  res.json({ message: 'Update project endpoint - to be implemented' });
-});
-
-projectRouter.delete('/:id', (_req, res) => {
-  res.json({ message: 'Delete project endpoint - to be implemented' });
-});
+// Project member routes
+projectRouter.post('/:id/members', projectController.addMember);
+projectRouter.put('/:id/members/:memberId', projectController.updateMemberRole);
+projectRouter.delete('/:id/members/:memberId', projectController.removeMember);

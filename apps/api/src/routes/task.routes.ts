@@ -1,24 +1,15 @@
 import { Router } from 'express';
+import { TaskController } from '../controllers/task.controller';
 
 export const taskRouter = Router();
+const taskController = new TaskController();
 
-// Placeholder routes - will be implemented
-taskRouter.get('/', (_req, res) => {
-  res.json({ message: 'List tasks endpoint - to be implemented' });
-});
+// Task CRUD routes
+taskRouter.get('/', taskController.list);
+taskRouter.post('/', taskController.create);
+taskRouter.get('/:id', taskController.get);
+taskRouter.put('/:id', taskController.update);
+taskRouter.delete('/:id', taskController.delete);
 
-taskRouter.post('/', (_req, res) => {
-  res.json({ message: 'Create task endpoint - to be implemented' });
-});
-
-taskRouter.get('/:id', (_req, res) => {
-  res.json({ message: 'Get task endpoint - to be implemented' });
-});
-
-taskRouter.put('/:id', (_req, res) => {
-  res.json({ message: 'Update task endpoint - to be implemented' });
-});
-
-taskRouter.delete('/:id', (_req, res) => {
-  res.json({ message: 'Delete task endpoint - to be implemented' });
-});
+// Task specific actions
+taskRouter.put('/:id/position', taskController.updatePosition);
