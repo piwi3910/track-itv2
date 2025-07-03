@@ -9,10 +9,12 @@ import { getDatabase } from './database';
 import { AppError } from '../middleware/errorHandler';
 import { ProjectService } from './project.service';
 import { emitToProject, emitToTask } from './socket';
+import { NotificationService } from './notification.service';
 
 export class TaskService {
   private db = getDatabase();
   private projectService = new ProjectService();
+  private notificationService = new NotificationService();
 
   async create(data: CreateTaskData, userId: string): Promise<Task> {
     // Verify user has access to the project
@@ -77,6 +79,11 @@ export class TaskService {
 
     // Create activity log
     await this.createActivity(task.id, userId, 'TASK_CREATED', `Created task "${task.title}"`);
+
+    // Send notification if task is assigned
+    if (task.assigneeId && task.assigneeId !== userId) {
+      await this.notificationService.notifyTaskAssignment(task.id, task.assigneeId, userId);
+    }
 
     // Emit real-time update
     emitToProject(task.projectId, 'task:created', task);
@@ -341,6 +348,13 @@ export class TaskService {
         'TASK_UPDATED',
         `Updated ${changes.join(', ')}`
       );
+    }
+
+    // Send notification for new assignment
+    if (data.assigneeId !== undefined && data.assigneeId !== existingTask.assigneeId) {
+      if (data.assigneeId && data.assigneeId !== userId) {
+        await this.notificationService.notifyTaskAssignment(task.id, data.assigneeId, userId);
+      }
     }
 
     // Emit real-time update

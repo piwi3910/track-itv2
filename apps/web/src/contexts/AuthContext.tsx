@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { User, LoginCredentials, RegisterData } from '@track-it/shared';
 import { authService } from '../services/auth';
+import { connectSocket, disconnectSocket } from '../services/socket';
 
 interface AuthContextType {
   user: User | null;
@@ -27,6 +28,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }): JSX.E
 
       const currentUser = await authService.getCurrentUser();
       setUser(currentUser);
+      if (currentUser) {
+        connectSocket(currentUser.id);
+      }
     } catch (error) {
       setUser(null);
       localStorage.removeItem('token');
@@ -43,17 +47,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }): JSX.E
     const response = await authService.login(credentials);
     const currentUser = await authService.getCurrentUser();
     setUser(currentUser);
+    if (currentUser) {
+      connectSocket(currentUser.id);
+    }
   };
 
   const register = async (data: RegisterData): Promise<void> => {
     const response = await authService.register(data);
     const currentUser = await authService.getCurrentUser();
     setUser(currentUser);
+    if (currentUser) {
+      connectSocket(currentUser.id);
+    }
   };
 
   const logout = async (): Promise<void> => {
     await authService.logout();
     setUser(null);
+    disconnectSocket();
   };
 
   const value = {

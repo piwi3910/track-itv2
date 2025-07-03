@@ -15,6 +15,7 @@ import { initializeSocketIO } from './services/socket';
 import { connectDatabase } from './services/database';
 import { connectRedis } from './services/redis';
 import { uploadConfig, ensureUploadDir } from './config/upload';
+import { queueService } from './services/queue.service';
 
 export async function createServer(): Promise<Application> {
   const app = express();
@@ -29,6 +30,9 @@ export async function createServer(): Promise<Application> {
   // Connect to databases
   await connectDatabase();
   await connectRedis();
+  
+  // Initialize queue service
+  await queueService.initialize();
   
   // Ensure upload directory exists
   await ensureUploadDir();

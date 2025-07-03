@@ -1,6 +1,7 @@
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { SearchBar } from './search/SearchBar';
+import { NotificationDropdown } from './notifications/NotificationDropdown';
 
 export function Layout(): JSX.Element {
   const { user, logout } = useAuth();
@@ -38,6 +39,7 @@ export function Layout(): JSX.Element {
             <div className="flex items-center gap-4">
               {user && (
                 <>
+                  <NotificationDropdown />
                   <span className="text-sm text-muted-foreground">
                     {user.firstName} {user.lastName}
                   </span>
