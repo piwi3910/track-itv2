@@ -1,5 +1,6 @@
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { SearchBar } from './search/SearchBar';
 
 export function Layout(): JSX.Element {
   const { user, logout } = useAuth();
@@ -28,6 +29,10 @@ export function Layout(): JSX.Element {
                   Tasks
                 </Link>
               </nav>
+            </div>
+            
+            <div className="flex-1 max-w-2xl mx-8">
+              <SearchBar />
             </div>
             
             <div className="flex items-center gap-4">

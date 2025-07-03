@@ -177,6 +177,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.3.0
         version: 3.10.0(react-hook-form@7.59.0)
+      '@mantine/hooks':
+        specifier: ^8.1.2
+        version: 8.1.2(react@18.3.1)
       '@tanstack/react-query':
         specifier: ^4.32.0
         version: 4.40.0(react-dom@18.3.1)(react@18.3.1)
@@ -1645,6 +1648,14 @@ packages:
 
   /@kurkle/color@0.3.4:
     resolution: {integrity: sha512-M5UknZPHRu3DEDWoipU6sE8PdkZ6Z/S+v4dD+Ke8IaNlpdSQah50lz1KtcFBa2vsdOnwbbnxJwVM4wty6udA5w==}
+    dev: false
+
+  /@mantine/hooks@8.1.2(react@18.3.1):
+    resolution: {integrity: sha512-BrriTsiazqZ2fLuL7UDasNTQJSaoJ7mN2qYVkdsiYI158lxJdUaFWHhd6BDyzK+W6thvBx2D+R/hh1rsWWefdQ==}
+    peerDependencies:
+      react: ^18.x || ^19.x
+    dependencies:
+      react: 18.3.1
     dev: false
 
   /@msgpackr-extract/msgpackr-extract-darwin-arm64@3.0.3:

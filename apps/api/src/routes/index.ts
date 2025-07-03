@@ -5,6 +5,7 @@ import { projectRouter } from './project.routes';
 import { taskRouter } from './task.routes';
 import { commentRouter } from './comment.routes';
 import { attachmentRouter } from './attachment.routes';
+import { searchRouter } from './search.routes';
 
 export function setupRoutes(app: Application): void {
   app.use('/api/auth', authRouter);
@@ -13,4 +14,5 @@ export function setupRoutes(app: Application): void {
   app.use('/api/tasks', taskRouter);
   app.use('/api/comments', commentRouter);
   app.use('/api/attachments', attachmentRouter);
+  app.use('/api/search', searchRouter);
 }
