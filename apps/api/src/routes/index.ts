@@ -7,6 +7,7 @@ import { commentRouter } from './comment.routes';
 import { attachmentRouter } from './attachment.routes';
 import { searchRouter } from './search.routes';
 import { notificationRouter } from './notification.routes';
+import { analyticsRouter } from './analytics.routes';
 
 export function setupRoutes(app: Application): void {
   app.use('/api/auth', authRouter);
@@ -17,4 +18,5 @@ export function setupRoutes(app: Application): void {
   app.use('/api/attachments', attachmentRouter);
   app.use('/api/search', searchRouter);
   app.use('/api/notifications', notificationRouter);
+  app.use('/api/analytics', analyticsRouter);
 }

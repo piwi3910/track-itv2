@@ -20,6 +20,11 @@ export const projectService = {
     return data;
   },
 
+  async getById(projectId: string): Promise<Project> {
+    const { data } = await api.get<Project>(`/projects/${projectId}`);
+    return data;
+  },
+
   async create(projectData: CreateProjectData): Promise<Project> {
     const { data } = await api.post<Project>('/projects', projectData);
     return data;
