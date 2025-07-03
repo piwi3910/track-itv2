@@ -59,8 +59,8 @@ model ProjectMember {
   role                 ProjectRole          @default(MEMBER)
   joinedAt             DateTime             @default(now())
   
-  user                 User                 @relation(fields: [userId], references: [id], onDelete: CASCADE)
-  project              Project              @relation(fields: [projectId], references: [id], onDelete: CASCADE)
+  user                 User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project              Project              @relation(fields: [projectId], references: [id], onDelete: Cascade)
   
   @@unique([userId, projectId])
   @@index([userId])
@@ -76,7 +76,7 @@ model Category {
   createdAt            DateTime             @default(now())
   updatedAt            DateTime             @updatedAt
   
-  project              Project              @relation(fields: [projectId], references: [id], onDelete: CASCADE)
+  project              Project              @relation(fields: [projectId], references: [id], onDelete: Cascade)
   tasks                Task[]
   
   @@unique([name, projectId])
@@ -103,8 +103,8 @@ model Task {
   createdAt            DateTime             @default(now())
   updatedAt            DateTime             @updatedAt
   
-  project              Project              @relation(fields: [projectId], references: [id], onDelete: CASCADE)
-  category             Category?            @relation(fields: [categoryId], references: [id], onDelete: SET NULL)
+  project              Project              @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  category             Category?            @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   creator              User                 @relation("TaskCreator", fields: [creatorId], references: [id])
   assignee             User?                @relation("TaskAssignee", fields: [assigneeId], references: [id])
   parent               Task?                @relation("TaskSubtasks", fields: [parentId], references: [id])
@@ -132,7 +132,7 @@ model Comment {
   createdAt            DateTime             @default(now())
   updatedAt            DateTime             @updatedAt
   
-  task                 Task                 @relation(fields: [taskId], references: [id], onDelete: CASCADE)
+  task                 Task                 @relation(fields: [taskId], references: [id], onDelete: Cascade)
   user                 User                 @relation(fields: [userId], references: [id])
   
   @@index([taskId])
@@ -151,7 +151,7 @@ model Attachment {
   userId               String
   createdAt            DateTime             @default(now())
   
-  task                 Task                 @relation(fields: [taskId], references: [id], onDelete: CASCADE)
+  task                 Task                 @relation(fields: [taskId], references: [id], onDelete: Cascade)
   user                 User                 @relation(fields: [userId], references: [id])
   
   @@index([taskId])
@@ -168,7 +168,7 @@ model Activity {
   userId               String
   createdAt            DateTime             @default(now())
   
-  task                 Task                 @relation(fields: [taskId], references: [id], onDelete: CASCADE)
+  task                 Task                 @relation(fields: [taskId], references: [id], onDelete: Cascade)
   user                 User                 @relation(fields: [userId], references: [id])
   
   @@index([taskId])
@@ -189,7 +189,7 @@ model Notification {
   readAt               DateTime?
   createdAt            DateTime             @default(now())
   
-  user                 User                 @relation(fields: [userId], references: [id], onDelete: CASCADE)
+  user                 User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
   
   @@index([userId])
   @@index([isRead])
