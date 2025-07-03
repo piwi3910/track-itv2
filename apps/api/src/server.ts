@@ -3,6 +3,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 import { createServer as createHttpServer } from 'http';
 import { Server as SocketIOServer } from 'socket.io';
 
@@ -13,6 +14,7 @@ import { setupRoutes } from './routes';
 import { initializeSocketIO } from './services/socket';
 import { connectDatabase } from './services/database';
 import { connectRedis } from './services/redis';
+import { uploadConfig, ensureUploadDir } from './config/upload';
 
 export async function createServer(): Promise<Application> {
   const app = express();
@@ -27,6 +29,9 @@ export async function createServer(): Promise<Application> {
   // Connect to databases
   await connectDatabase();
   await connectRedis();
+  
+  // Ensure upload directory exists
+  await ensureUploadDir();
 
   // Security middleware
   app.use(helmet());
@@ -53,6 +58,9 @@ export async function createServer(): Promise<Application> {
 
   // Initialize Socket.IO
   initializeSocketIO(io);
+
+  // Static files for uploads
+  app.use('/uploads', express.static(uploadConfig.baseDir));
 
   // API routes
   setupRoutes(app);

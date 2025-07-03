@@ -4,6 +4,7 @@ import { Task } from '@track-it/shared';
 import { taskService } from '../services/task';
 import { TaskCard } from '../components/tasks/TaskCard';
 import { CreateTaskModal } from '../components/tasks/CreateTaskModal';
+import { TaskDetailModal } from '../components/tasks/TaskDetailModal';
 
 export function TasksPage(): JSX.Element {
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -24,7 +25,6 @@ export function TasksPage(): JSX.Element {
   });
 
   const handleTaskClick = (task: Task): void => {
-    // TODO: Open task detail modal
     setSelectedTask(task);
   };
 
@@ -96,6 +96,12 @@ export function TasksPage(): JSX.Element {
         isOpen={showCreateModal}
         onClose={() => setShowCreateModal(false)}
         onSubmit={createTaskMutation.mutateAsync}
+      />
+
+      <TaskDetailModal
+        task={selectedTask}
+        opened={!!selectedTask}
+        onClose={() => setSelectedTask(null)}
       />
     </div>
   );
